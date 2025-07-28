@@ -29,6 +29,7 @@ client.on('messageCreate', async (message) => {
 
     const command = message.content.slice(PREFIX.length).trim().toLowerCase();
 
+    //Comando "gato" muestra un gato random
     if (command === 'gato') {
         try {
             const response = await fetch('https://api.thecatapi.com/v1/images/search');
@@ -46,6 +47,12 @@ client.on('messageCreate', async (message) => {
             await message.reply('Ocurrió un error al obtener la imagen del gato.');
         }
         return;
+    }
+
+    // Comando "siono"
+    if (command === 'siono') {
+        const respuesta = Math.random() < 0.5 ? 'Sí 😈' : 'No ☠️';
+        return message.reply(`${respuesta}`);
     }
 
 
