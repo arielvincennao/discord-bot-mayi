@@ -1,10 +1,11 @@
-## Discord Bot for Discord.
+## Mayi Bot – A Fun Discord Bot
 
-This bot is developed for Discord to respond to specific user commands.  
-Its main features are:
+Mayi Bot is a playful Discord bot inspired by the iconic phrases of Mayi, my legendary friend.
+It responds to specific commands with the following features:
 
-- When triggered by a command, it joins the user’s voice channel, plays a predefined audio from "Mayi", then disconnects.  
-- It can also send random cat images in the text chat upon request.
+🎤 Voice Channel Interaction: When a command is triggered, the bot joins the user’s voice channel, plays a predefined audio clip featuring Mayi’s classic lines, and then gracefully leaves.
+
+🐱 Random Cat Images: On request, the bot sends random cat pictures to the text chat to brighten your day.
 
 ## How is it developed?
 
