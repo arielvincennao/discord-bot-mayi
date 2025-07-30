@@ -1,5 +1,5 @@
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
-const { Client, GatewayIntentBits } = require('discord.js');
+const { Client, GatewayIntentBits, Events, Partials } = require('discord.js');
 const { joinVoiceChannel, createAudioPlayer, createAudioResource, AudioPlayerStatus } = require('@discordjs/voice');
 const path = require('path');
 const fs = require('fs');
@@ -13,16 +13,51 @@ const client = new Client({
         GatewayIntentBits.GuildVoiceStates,
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.MessageContent
-    ]
+    ],
+    partials: [Partials.Channel]
 });
 
-const PREFIX = 'm!';
+const PREFIX = 'mb!';
 const AUDIO_FOLDER = path.join(__dirname, 'assets');
 
 client.once('ready', () => {
     console.log(`Bot ready, connected as ${client.user.tag}`);
+    client.user.setActivity('League Of Legends as Master Yi', { type: 'PLAYING' });
 });
 
+// --- Slash commands
+client.on(Events.InteractionCreate, async interaction => {
+    if (!interaction.isCommand()) return;
+
+    const { commandName } = interaction;
+
+    if (commandName === 'gato') {
+        try {
+            const response = await fetch('https://api.thecatapi.com/v1/images/search');
+            if (!response.ok) throw new Error('No se pudo obtener la imagen');
+
+            const data = await response.json();
+            const catImageUrl = data[0].url;
+
+            await interaction.reply({
+                content: '😺 Mira loko un gatubi random',
+                files: [catImageUrl],
+            });
+        } catch (error) {
+            console.error('Error al obtener imagen de gato (slash):', error);
+            await interaction.reply('Ocurrió un error al obtener la imagen del gato.');
+        }
+    }
+
+    if (commandName === 'siono') {
+        const pregunta = interaction.options.getString('pregunta');
+        const respuesta = Math.random() < 0.5 ? 'Sí 😈' : 'No ☠️';
+         await interaction.reply(`Pregunta: "${pregunta}"\nRespuesta: ${respuesta}`);
+    }
+});
+
+
+// --- Prefix commands
 client.on('messageCreate', async (message) => {
     if (message.author.bot) return;
     if (!message.content.startsWith(PREFIX)) return;
