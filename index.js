@@ -31,6 +31,7 @@ client.on(Events.InteractionCreate, async interaction => {
 
     const { commandName } = interaction;
 
+    //Slash gato
     if (commandName === 'gato') {
         try {
             const response = await fetch('https://api.thecatapi.com/v1/images/search');
@@ -49,10 +50,11 @@ client.on(Events.InteractionCreate, async interaction => {
         }
     }
 
+    //Slash siono + pregunta
     if (commandName === 'siono') {
         const pregunta = interaction.options.getString('pregunta');
         const respuesta = Math.random() < 0.5 ? 'Sí 😈' : 'No ☠️';
-         await interaction.reply(`Pregunta: "${pregunta}"\nRespuesta: ${respuesta}`);
+        await interaction.reply(`Pregunta: "${pregunta}"\nRespuesta: ${respuesta}`);
     }
 });
 
