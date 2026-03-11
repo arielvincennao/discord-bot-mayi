@@ -12,3 +12,7 @@ It responds to specific commands with the following features:
 - Language: JavaScript (Node.js)  
 - Main library: [discord.js](https://discord.js.org/) for interacting with the Discord API  
 - Uses libraries for audio playback and fetching random cat images.
+
+## Run the bot
+
+- Use the script running: node index.js
